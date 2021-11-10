@@ -1,0 +1,132 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 0.75rem;
+  width: 100%;
+  min-width: 100vh;
+}
+
+[class^="row-"] {
+  background-color: rgb(6, 60, 129);
+}
+
+.rows-container {
+  display: grid;
+  height: 100vh;
+  grid-template-rows: 28vh 7vh 37vh 5vh 8vh 25vh;
+  background-color: rgb(6, 60, 129);
+}
+
+.row-2 > div {
+  display: grid;
+  grid-template-columns: 1fr;
+  color: white;
+  width: 100%;
+}
+
+.row-6 {
+  display: grid;
+  height: 10vh;
+  grid-template-columns: repeat(7, 1fr);
+  padding-top: 1%;
+  margin-top: 1%;
+  width: 100%;
+}
+
+.row-6 > button {
+  background-color: grey;
+}
+
+.row-5 {
+  display: grid;
+  gap: 2px;
+  grid-template-columns: 40vw 20vw 40vw;
+  color: yellow;
+  width: 100%;
+}
+
+.row-4 {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  color: yellow;
+  text-align: center;
+}
+
+.row-3 {
+  display: grid;
+  width: 100vw;
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.row-3 > div {
+  background-image: url("./img/back.png");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  margin: 0 15% 0 15%;
+}
+
+.row-1 {
+  display: grid;
+  height: 28vh;
+  grid-template-columns: 30vw 20vw auto 20vw;
+}
+
+#full-names {
+  display: grid;
+  grid-template-rows: repeat(8, 1fr);
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+  padding-left: 2%;
+}
+
+#scores {
+  display: grid;
+  grid-template-rows: repeat(4, 1fr);
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+.row-1 > div {
+  padding-top: 5px;
+}
+
+.row-2 > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#full-numbers {
+  /* text-align: right;
+  font-size: 0.9rem;
+  letter-spacing: 1px; */
+  display: grid;
+  grid-template-rows: repeat(8, 1fr);
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+  text-align: right;
+}
+
+#left-bc {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 15%;
+  letter-spacing: 0.25rem;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+#right-bc {
+  display: flex;
+  align-items: center;
+  padding-left: 15%;
+  letter-spacing: 0.25rem;
+  font-size: 1rem;
+  font-weight: bold;
+}
