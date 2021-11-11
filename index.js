@@ -550,6 +550,7 @@ dealBtn.addEventListener("click",async function(){
     let stake = parseInt(stakeScore.innerText)
     if (counter === 0)
     {   
+        document.getElementById("btn-deal").disabled = true;
         document.getElementById("fh-bonus").innerText = ((parseInt(document.getElementById("fh-bonus").innerText)+(fhIncentive))).toString()
 
         if (leftOrRight === 1)
@@ -587,10 +588,11 @@ dealBtn.addEventListener("click",async function(){
         
        
         counter += 1
+        document.getElementById("btn-deal").disabled = false;
     }
     else if (counter === 1)
     {
-        
+        document.getElementById("btn-deal").disabled = true;
         for(let i=0;i<5;i++)
         {
             tempArray.push(((document.getElementById("card"+ (i+1)).style.backgroundImage.toString().substring(11))).slice(0,-6))
@@ -616,6 +618,7 @@ dealBtn.addEventListener("click",async function(){
         }
         checkResults()    
         counter -= 1 
+        document.getElementById("btn-deal").disabled = false;
     }   
 })
 
