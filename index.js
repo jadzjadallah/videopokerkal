@@ -1093,11 +1093,11 @@ doubleUpBtn.addEventListener("click",async function(){
 
 async function checkResults(){
 
-    document.getElementById("card1").style.backgroundImage = 'url(./img/king_of_hearts.png)'
-    document.getElementById("card2").style.backgroundImage = 'url(./img/king_of_spades.png)'
-    document.getElementById("card3").style.backgroundImage = 'url(./img/king_of_diamonds.png)'
-    document.getElementById("card4").style.backgroundImage = 'url(./img/king_of_clubs.png)'
-    document.getElementById("card5").style.backgroundImage = 'url(./img/9_of_hearts.png)'
+    // document.getElementById("card1").style.backgroundImage = 'url(./img/king_of_hearts.png)'
+    // document.getElementById("card2").style.backgroundImage = 'url(./img/king_of_spades.png)'
+    // document.getElementById("card3").style.backgroundImage = 'url(./img/king_of_diamonds.png)'
+    // document.getElementById("card4").style.backgroundImage = 'url(./img/king_of_clubs.png)'
+    // document.getElementById("card5").style.backgroundImage = 'url(./img/9_of_hearts.png)'
 
     let resultArray=[]
     let numArray = []
