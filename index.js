@@ -15,6 +15,7 @@ document.getElementById("btn-deal").disabled = true;
 
 let counter = 0
 let gamble = false
+let firstRow = true
 let actual = 0
 let actualb = 0
 let actuals = 0
@@ -97,7 +98,7 @@ cancelHoldBtn.addEventListener("click", function(){
 
 stakeBtn.addEventListener("click", function(){
 
-
+    
     document.getElementById("btn-deal").disabled = false;
     document.getElementById("btn-cancel-hold").disabled = false;
     document.getElementById("btn-take-score").disabled = false;
@@ -121,7 +122,7 @@ stakeBtn.addEventListener("click", function(){
         }
     }
 
-    else{
+    else if (firstRow === true){
         for(let i=1;i<=5;i++)
         {
             if(document.getElementById("hold"+ (i)).innerText === '')
@@ -134,12 +135,24 @@ stakeBtn.addEventListener("click", function(){
             let randomNumber = Math.floor(Math.random() * (52))
             document.getElementById("card" + (actual)).style.backgroundImage = 'url(./img/' + deck_of_cards[randomNumber] + '.png)'
         }
-
+    }
+    else if (firstRow === false){
+        for(let i=1;i<=5;i++)
+        {
+            if(document.getElementById("hold"+ (i)).innerText === '')
+            {actual = i;break;}
+        }
+        changeCard += 1
+        if (changeCard <= 1)
+        {
+            let randomNumber = Math.floor(Math.random() * (52))
+            document.getElementById("card" + (actual)).style.backgroundImage = 'url(./img/' + deck_of_cards[randomNumber] + '.png)'
+        }
     }
     
 })
 
-bigBtn.addEventListener("click", async function(){
+bigBtn.addEventListener("click", async function(){ console.log(firstRow)
     doubleUpBtn.disabled = false;
     changeCard = 0;
     for(let i=1;i<=5;i++)
@@ -268,6 +281,7 @@ bigBtn.addEventListener("click", async function(){
             document.getElementById("card3").style.backgroundImage = 'none'
             document.getElementById("card4").style.backgroundImage = 'none'
             document.getElementById("card5").style.backgroundImage = 'none'
+            firstRow = false
             clearHold()
         }
     }
@@ -309,7 +323,8 @@ bigBtn.addEventListener("click", async function(){
         clearHold()
         clearNames()
         changeScores()
-        
+        firstRow = true
+
         document.getElementById("btn-big").disabled = true;
         document.getElementById("btn-small").disabled = true;
         document.getElementById("btn-deal").disabled = false;
@@ -319,7 +334,7 @@ bigBtn.addEventListener("click", async function(){
     }
 })
 
-smallBtn.addEventListener("click", async function(){
+smallBtn.addEventListener("click", async function(){ console.log(firstRow)
     doubleUpBtn.disabled = false;
     changeCard = 0;
     for(let i=1;i<=5;i++)
@@ -440,6 +455,7 @@ smallBtn.addEventListener("click", async function(){
         doubleWin()
         if (s === 5)
         {
+
             testCheckResults()
             let lastCUrl = document.getElementById("card5").style.backgroundImage
             await new Promise(done => setTimeout(() => done(), 1000));
@@ -448,6 +464,7 @@ smallBtn.addEventListener("click", async function(){
             document.getElementById("card3").style.backgroundImage = 'none'
             document.getElementById("card4").style.backgroundImage = 'none'
             document.getElementById("card5").style.backgroundImage = 'none'
+            firstRow = false
             clearHold()
         }
     }               
@@ -489,6 +506,8 @@ smallBtn.addEventListener("click", async function(){
         clearHold()
         clearNames()
         changeScores()
+        firstRow = true
+
         document.getElementById("btn-big").disabled = true;
         document.getElementById("btn-small").disabled = true;
         document.getElementById("btn-deal").disabled = false;
@@ -520,7 +539,7 @@ function clearHold(){
 dealBtn.addEventListener("click",async function(){
 
     document.getElementById("btn-double-up").disabled = false;
-    
+
     let fhIncentive = Math.floor(Math.random() * 50) + 1
     let carreIncentive = Math.floor(Math.random() * 6) + 4 ;
     let leftOrRight = Math.floor(Math.random() * 2) + 1;
@@ -606,82 +625,418 @@ takeScoreBtn.addEventListener("click",async function(){
     if (document.getElementById("two-title").style.backgroundColor.toString() !== '')
         {
             wins = parseInt(document.getElementById("two-show").textContent)
-            for(i=1;i<=wins/5;i++)
-            {
-                await new Promise(done => setTimeout(() => done(), 0.1));
-                document.getElementById("credit-score").textContent = (parseInt(document.getElementById("credit-score").textContent) + 5).toString()
-                document.getElementById("two-show").textContent = (parseInt(document.getElementById("two-show").textContent) - 5).toString()
-            }  
+            if (wins % 1000 === 0){
+                for(i=1;i<=wins/1000;i++)
+                {
+                    await new Promise(done => setTimeout(() => done(), 0.1));
+                    document.getElementById("credit-score").textContent = (parseInt(document.getElementById("credit-score").textContent) + 1000).toString()
+                    document.getElementById("flush-show").textContent = (parseInt(document.getElementById("flush-show").textContent) - 1000).toString()
+                }
+            }
+            else if (wins % 500 === 0){
+                for(i=1;i<=wins/500;i++)
+                {
+                    await new Promise(done => setTimeout(() => done(), 0.1));
+                    document.getElementById("credit-score").textContent = (parseInt(document.getElementById("credit-score").textContent) + 500).toString()
+                    document.getElementById("two-show").textContent = (parseInt(document.getElementById("two-show").textContent) - 500).toString()
+                }
+            }
+            else if (wins % 250 === 0){
+                for(i=1;i<=wins/250;i++)
+                {
+                    await new Promise(done => setTimeout(() => done(), 0.1));
+                    document.getElementById("credit-score").textContent = (parseInt(document.getElementById("credit-score").textContent) + 250).toString()
+                    document.getElementById("two-show").textContent = (parseInt(document.getElementById("two-show").textContent) - 250).toString()
+                }
+            }
+            else if (wins % 100 === 0){
+                for(i=1;i<=wins/100;i++)
+                {
+                    await new Promise(done => setTimeout(() => done(), 0.1));
+                    document.getElementById("credit-score").textContent = (parseInt(document.getElementById("credit-score").textContent) + 100).toString()
+                    document.getElementById("two-show").textContent = (parseInt(document.getElementById("two-show").textContent) - 100).toString()
+                }
+            }
+            else if (wins % 50 === 0){
+                for(i=1;i<=wins/50;i++)
+                {
+                    await new Promise(done => setTimeout(() => done(), 0.1));
+                    document.getElementById("credit-score").textContent = (parseInt(document.getElementById("credit-score").textContent) + 50).toString()
+                    document.getElementById("two-show").textContent = (parseInt(document.getElementById("two-show").textContent) - 50).toString()
+                }
+            }
+            else if (wins % 25 === 0){
+                for(i=1;i<=wins/25;i++)
+                {
+                    await new Promise(done => setTimeout(() => done(), 0.1));
+                    document.getElementById("credit-score").textContent = (parseInt(document.getElementById("credit-score").textContent) + 25).toString()
+                    document.getElementById("two-show").textContent = (parseInt(document.getElementById("two-show").textContent) - 25).toString()
+                }
+            }
         }
     else if (document.getElementById("three-title").style.backgroundColor.toString() !== '')
         {
             wins = parseInt(document.getElementById("three-show").textContent)
-            for(i=1;i<=wins/5;i++)
-            {
-                await new Promise(done => setTimeout(() => done(), 0.1));
-                document.getElementById("credit-score").textContent = (parseInt(document.getElementById("credit-score").textContent) + 5).toString()
-                document.getElementById("three-show").textContent = (parseInt(document.getElementById("three-show").textContent) - 5).toString()
-            }  
+            if (wins % 1000 === 0){
+                for(i=1;i<=wins/1000;i++)
+                {
+                    await new Promise(done => setTimeout(() => done(), 0.1));
+                    document.getElementById("credit-score").textContent = (parseInt(document.getElementById("credit-score").textContent) + 1000).toString()
+                    document.getElementById("three-show").textContent = (parseInt(document.getElementById("three-show").textContent) - 1000).toString()
+                }
+            }
+            else if (wins % 500 === 0){
+                for(i=1;i<=wins/500;i++)
+                {
+                    await new Promise(done => setTimeout(() => done(), 0.1));
+                    document.getElementById("credit-score").textContent = (parseInt(document.getElementById("credit-score").textContent) + 500).toString()
+                    document.getElementById("three-show").textContent = (parseInt(document.getElementById("three-show").textContent) - 500).toString()
+                }
+            }
+            else if (wins % 250 === 0){
+                for(i=1;i<=wins/250;i++)
+                {
+                    await new Promise(done => setTimeout(() => done(), 0.1));
+                    document.getElementById("credit-score").textContent = (parseInt(document.getElementById("credit-score").textContent) + 250).toString()
+                    document.getElementById("three-show").textContent = (parseInt(document.getElementById("three-show").textContent) - 250).toString()
+                }
+            }
+            else if (wins % 100 === 0){
+                for(i=1;i<=wins/100;i++)
+                {
+                    await new Promise(done => setTimeout(() => done(), 0.1));
+                    document.getElementById("credit-score").textContent = (parseInt(document.getElementById("credit-score").textContent) + 100).toString()
+                    document.getElementById("three-show").textContent = (parseInt(document.getElementById("three-show").textContent) - 100).toString()
+                }
+            }
+            else if (wins % 50 === 0){
+                for(i=1;i<=wins/50;i++)
+                {
+                    await new Promise(done => setTimeout(() => done(), 0.1));
+                    document.getElementById("credit-score").textContent = (parseInt(document.getElementById("credit-score").textContent) + 50).toString()
+                    document.getElementById("three-show").textContent = (parseInt(document.getElementById("three-show").textContent) - 50).toString()
+                }
+            }
+            else if (wins % 25 === 0){
+                for(i=1;i<=wins/25;i++)
+                {
+                    await new Promise(done => setTimeout(() => done(), 0.1));
+                    document.getElementById("credit-score").textContent = (parseInt(document.getElementById("credit-score").textContent) + 25).toString()
+                    document.getElementById("three-show").textContent = (parseInt(document.getElementById("three-show").textContent) - 25).toString()
+                }
+            } 
         }
     else if (document.getElementById("straight-title").style.backgroundColor.toString() !== '')
         {
             wins = parseInt(document.getElementById("straight-show").textContent)
-            for(i=1;i<=wins/5;i++)
-            {
-                await new Promise(done => setTimeout(() => done(), 0.1));
-                document.getElementById("credit-score").textContent = (parseInt(document.getElementById("credit-score").textContent) + 5).toString()
-                document.getElementById("straight-show").textContent = (parseInt(document.getElementById("straight-show").textContent) - 5).toString()
+            if (wins % 1000 === 0){
+                for(i=1;i<=wins/1000;i++)
+                {
+                    await new Promise(done => setTimeout(() => done(), 0.1));
+                    document.getElementById("credit-score").textContent = (parseInt(document.getElementById("credit-score").textContent) + 1000).toString()
+                    document.getElementById("straight-show").textContent = (parseInt(document.getElementById("straight-show").textContent) - 1000).toString()
+                }
+            }
+            else if (wins % 500 === 0){
+                for(i=1;i<=wins/500;i++)
+                {
+                    await new Promise(done => setTimeout(() => done(), 0.1));
+                    document.getElementById("credit-score").textContent = (parseInt(document.getElementById("credit-score").textContent) + 500).toString()
+                    document.getElementById("straight-show").textContent = (parseInt(document.getElementById("straight-show").textContent) - 500).toString()
+                }
+            }
+            else if (wins % 250 === 0){
+                for(i=1;i<=wins/250;i++)
+                {
+                    await new Promise(done => setTimeout(() => done(), 0.1));
+                    document.getElementById("credit-score").textContent = (parseInt(document.getElementById("credit-score").textContent) + 250).toString()
+                    document.getElementById("straight-show").textContent = (parseInt(document.getElementById("straight-show").textContent) - 250).toString()
+                }
+            }
+            else if (wins % 100 === 0){
+                for(i=1;i<=wins/100;i++)
+                {
+                    await new Promise(done => setTimeout(() => done(), 0.1));
+                    document.getElementById("credit-score").textContent = (parseInt(document.getElementById("credit-score").textContent) + 100).toString()
+                    document.getElementById("straight-show").textContent = (parseInt(document.getElementById("straight-show").textContent) - 100).toString()
+                }
+            }
+            else if (wins % 50 === 0){
+                for(i=1;i<=wins/50;i++)
+                {
+                    await new Promise(done => setTimeout(() => done(), 0.1));
+                    document.getElementById("credit-score").textContent = (parseInt(document.getElementById("credit-score").textContent) + 50).toString()
+                    document.getElementById("straight-show").textContent = (parseInt(document.getElementById("straight-show").textContent) - 50).toString()
+                }
+            }
+            else if (wins % 25 === 0){
+                for(i=1;i<=wins/25;i++)
+                {
+                    await new Promise(done => setTimeout(() => done(), 0.1));
+                    document.getElementById("credit-score").textContent = (parseInt(document.getElementById("credit-score").textContent) + 25).toString()
+                    document.getElementById("straight-show").textContent = (parseInt(document.getElementById("straight-show").textContent) - 25).toString()
+                }
             }  
         }
     else if (document.getElementById("flush-title").style.backgroundColor.toString() !== '')
         {
             wins = parseInt(document.getElementById("flush-show").textContent)
-            for(i=1;i<=wins/5;i++)
-            {
-                await new Promise(done => setTimeout(() => done(), 0.1));
-                document.getElementById("credit-score").textContent = (parseInt(document.getElementById("credit-score").textContent) + 5).toString()
-                document.getElementById("flush-show").textContent = (parseInt(document.getElementById("flush-show").textContent) - 5).toString()
+            if (wins % 1000 === 0){
+                for(i=1;i<=wins/1000;i++)
+                {
+                    await new Promise(done => setTimeout(() => done(), 0.1));
+                    document.getElementById("credit-score").textContent = (parseInt(document.getElementById("credit-score").textContent) + 1000).toString()
+                    document.getElementById("flush-show").textContent = (parseInt(document.getElementById("flush-show").textContent) - 1000).toString()
+                }
+            }
+            else if (wins % 500 === 0){
+                for(i=1;i<=wins/500;i++)
+                {
+                    await new Promise(done => setTimeout(() => done(), 0.1));
+                    document.getElementById("credit-score").textContent = (parseInt(document.getElementById("credit-score").textContent) + 500).toString()
+                    document.getElementById("flush-show").textContent = (parseInt(document.getElementById("flush-show").textContent) - 500).toString()
+                }
+            }
+            else if (wins % 250 === 0){
+                for(i=1;i<=wins/250;i++)
+                {
+                    await new Promise(done => setTimeout(() => done(), 0.1));
+                    document.getElementById("credit-score").textContent = (parseInt(document.getElementById("credit-score").textContent) + 250).toString()
+                    document.getElementById("flush-show").textContent = (parseInt(document.getElementById("flush-show").textContent) - 250).toString()
+                }
+            }
+            else if (wins % 100 === 0){
+                for(i=1;i<=wins/100;i++)
+                {
+                    await new Promise(done => setTimeout(() => done(), 0.1));
+                    document.getElementById("credit-score").textContent = (parseInt(document.getElementById("credit-score").textContent) + 100).toString()
+                    document.getElementById("flush-show").textContent = (parseInt(document.getElementById("flush-show").textContent) - 100).toString()
+                }
+            }
+            else if (wins % 50 === 0){
+                for(i=1;i<=wins/50;i++)
+                {
+                    await new Promise(done => setTimeout(() => done(), 0.1));
+                    document.getElementById("credit-score").textContent = (parseInt(document.getElementById("credit-score").textContent) + 50).toString()
+                    document.getElementById("flush-show").textContent = (parseInt(document.getElementById("flush-show").textContent) - 50).toString()
+                }
+            }
+            else if (wins % 25 === 0){
+                for(i=1;i<=wins/25;i++)
+                {
+                    await new Promise(done => setTimeout(() => done(), 0.1));
+                    document.getElementById("credit-score").textContent = (parseInt(document.getElementById("credit-score").textContent) + 25).toString()
+                    document.getElementById("flush-show").textContent = (parseInt(document.getElementById("flush-show").textContent) - 25).toString()
+                }
             }  
         }
     else if (document.getElementById("fh-title").style.backgroundColor.toString() !== '')
         {
             wins = parseInt(document.getElementById("fh-show").textContent)
-            for(i=1;i<=wins/5;i++)
-            {
-                await new Promise(done => setTimeout(() => done(), 0.1));
-                document.getElementById("credit-score").textContent = (parseInt(document.getElementById("credit-score").textContent) + 5).toString()
-                document.getElementById("fh-show").textContent = (parseInt(document.getElementById("fh-show").textContent) - 5).toString()
-            }  
+            if (wins % 1000 === 0){
+                for(i=1;i<=wins/1000;i++)
+                {
+                    await new Promise(done => setTimeout(() => done(), 0.1));
+                    document.getElementById("credit-score").textContent = (parseInt(document.getElementById("credit-score").textContent) + 1000).toString()
+                    document.getElementById("fh-show").textContent = (parseInt(document.getElementById("fh-show").textContent) - 1000).toString()
+                }
+            }
+            else if (wins % 500 === 0){
+                for(i=1;i<=wins/500;i++)
+                {
+                    await new Promise(done => setTimeout(() => done(), 0.1));
+                    document.getElementById("credit-score").textContent = (parseInt(document.getElementById("credit-score").textContent) + 500).toString()
+                    document.getElementById("fh-show").textContent = (parseInt(document.getElementById("fh-show").textContent) - 500).toString()
+                }
+            }
+            else if (wins % 250 === 0){
+                for(i=1;i<=wins/250;i++)
+                {
+                    await new Promise(done => setTimeout(() => done(), 0.1));
+                    document.getElementById("credit-score").textContent = (parseInt(document.getElementById("credit-score").textContent) + 250).toString()
+                    document.getElementById("fh-show").textContent = (parseInt(document.getElementById("fh-show").textContent) - 250).toString()
+                }
+            }
+            else if (wins % 100 === 0){
+                for(i=1;i<=wins/100;i++)
+                {
+                    await new Promise(done => setTimeout(() => done(), 0.1));
+                    document.getElementById("credit-score").textContent = (parseInt(document.getElementById("credit-score").textContent) + 100).toString()
+                    document.getElementById("fh-show").textContent = (parseInt(document.getElementById("fh-show").textContent) - 100).toString()
+                }
+            }
+            else if (wins % 50 === 0){
+                for(i=1;i<=wins/50;i++)
+                {
+                    await new Promise(done => setTimeout(() => done(), 0.1));
+                    document.getElementById("credit-score").textContent = (parseInt(document.getElementById("credit-score").textContent) + 50).toString()
+                    document.getElementById("fh-show").textContent = (parseInt(document.getElementById("fh-show").textContent) - 50).toString()
+                }
+            }
+            else if (wins % 25 === 0){
+                for(i=1;i<=wins/25;i++)
+                {
+                    await new Promise(done => setTimeout(() => done(), 0.1));
+                    document.getElementById("credit-score").textContent = (parseInt(document.getElementById("credit-score").textContent) + 25).toString()
+                    document.getElementById("fh-show").textContent = (parseInt(document.getElementById("fh-show").textContent) - 25).toString()
+                }
+            }   
         }
     else if (document.getElementById("carre-title").style.backgroundColor.toString() !== '')
         {
             wins = parseInt(document.getElementById("carre-show").textContent)
-            for(i=1;i<=wins/5;i++)
-            {
-                await new Promise(done => setTimeout(() => done(), 0.1));
-                document.getElementById("credit-score").textContent = (parseInt(document.getElementById("credit-score").textContent) + 5).toString()
-                document.getElementById("carre-show").textContent = (parseInt(document.getElementById("carre-show").textContent) - 5).toString()
-            }  
+            if (wins % 1000 === 0){
+                for(i=1;i<=wins/1000;i++)
+                {
+                    await new Promise(done => setTimeout(() => done(), 0.1));
+                    document.getElementById("credit-score").textContent = (parseInt(document.getElementById("credit-score").textContent) + 1000).toString()
+                    document.getElementById("carre-show").textContent = (parseInt(document.getElementById("carre-show").textContent) - 1000).toString()
+                }
+            }
+            else if (wins % 500 === 0){
+                for(i=1;i<=wins/500;i++)
+                {
+                    await new Promise(done => setTimeout(() => done(), 0.1));
+                    document.getElementById("credit-score").textContent = (parseInt(document.getElementById("credit-score").textContent) + 500).toString()
+                    document.getElementById("carre-show").textContent = (parseInt(document.getElementById("carre-show").textContent) - 500).toString()
+                }
+            }
+            else if (wins % 250 === 0){
+                for(i=1;i<=wins/250;i++)
+                {
+                    await new Promise(done => setTimeout(() => done(), 0.1));
+                    document.getElementById("credit-score").textContent = (parseInt(document.getElementById("credit-score").textContent) + 250).toString()
+                    document.getElementById("carre-show").textContent = (parseInt(document.getElementById("carre-show").textContent) - 250).toString()
+                }
+            }
+            else if (wins % 100 === 0){
+                for(i=1;i<=wins/100;i++)
+                {
+                    await new Promise(done => setTimeout(() => done(), 0.1));
+                    document.getElementById("credit-score").textContent = (parseInt(document.getElementById("credit-score").textContent) + 100).toString()
+                    document.getElementById("carre-show").textContent = (parseInt(document.getElementById("carre-show").textContent) - 100).toString()
+                }
+            }
+            else if (wins % 50 === 0){
+                for(i=1;i<=wins/50;i++)
+                {
+                    await new Promise(done => setTimeout(() => done(), 0.1));
+                    document.getElementById("credit-score").textContent = (parseInt(document.getElementById("credit-score").textContent) + 50).toString()
+                    document.getElementById("carre-show").textContent = (parseInt(document.getElementById("carre-show").textContent) - 50).toString()
+                }
+            }
+            else if (wins % 25 === 0){
+                for(i=1;i<=wins/25;i++)
+                {
+                    await new Promise(done => setTimeout(() => done(), 0.1));
+                    document.getElementById("credit-score").textContent = (parseInt(document.getElementById("credit-score").textContent) + 25).toString()
+                    document.getElementById("carre-show").textContent = (parseInt(document.getElementById("carre-show").textContent) - 25).toString()
+                }
+            }   
         }
     else if (document.getElementById("sf-title").style.backgroundColor.toString() !== '')
         {
             wins = parseInt(document.getElementById("sf-show").textContent)
-            for(i=1;i<=wins/5;i++)
-            {
-                await new Promise(done => setTimeout(() => done(), 0.1));
-                document.getElementById("credit-score").textContent = (parseInt(document.getElementById("credit-score").textContent) + 5).toString()
-                document.getElementById("sf-show").textContent = (parseInt(document.getElementById("sf-show").textContent) - 5).toString()
-            }  
+            if (wins % 1000 === 0){
+                for(i=1;i<=wins/1000;i++)
+                {
+                    await new Promise(done => setTimeout(() => done(), 0.1));
+                    document.getElementById("credit-score").textContent = (parseInt(document.getElementById("credit-score").textContent) + 1000).toString()
+                    document.getElementById("sf-show").textContent = (parseInt(document.getElementById("sf-show").textContent) - 1000).toString()
+                }
+            }
+            else if (wins % 500 === 0){
+                for(i=1;i<=wins/500;i++)
+                {
+                    await new Promise(done => setTimeout(() => done(), 0.1));
+                    document.getElementById("credit-score").textContent = (parseInt(document.getElementById("credit-score").textContent) + 500).toString()
+                    document.getElementById("sf-show").textContent = (parseInt(document.getElementById("sf-show").textContent) - 500).toString()
+                }
+            }
+            else if (wins % 250 === 0){
+                for(i=1;i<=wins/250;i++)
+                {
+                    await new Promise(done => setTimeout(() => done(), 0.1));
+                    document.getElementById("credit-score").textContent = (parseInt(document.getElementById("credit-score").textContent) + 250).toString()
+                    document.getElementById("sf-show").textContent = (parseInt(document.getElementById("sf-show").textContent) - 250).toString()
+                }
+            }
+            else if (wins % 100 === 0){
+                for(i=1;i<=wins/100;i++)
+                {
+                    await new Promise(done => setTimeout(() => done(), 0.1));
+                    document.getElementById("credit-score").textContent = (parseInt(document.getElementById("credit-score").textContent) + 100).toString()
+                    document.getElementById("sf-show").textContent = (parseInt(document.getElementById("sf-show").textContent) - 100).toString()
+                }
+            }
+            else if (wins % 50 === 0){
+                for(i=1;i<=wins/50;i++)
+                {
+                    await new Promise(done => setTimeout(() => done(), 0.1));
+                    document.getElementById("credit-score").textContent = (parseInt(document.getElementById("credit-score").textContent) + 50).toString()
+                    document.getElementById("sf-show").textContent = (parseInt(document.getElementById("sf-show").textContent) - 50).toString()
+                }
+            }
+            else if (wins % 25 === 0){
+                for(i=1;i<=wins/25;i++)
+                {
+                    await new Promise(done => setTimeout(() => done(), 0.1));
+                    document.getElementById("credit-score").textContent = (parseInt(document.getElementById("credit-score").textContent) + 25).toString()
+                    document.getElementById("sf-show").textContent = (parseInt(document.getElementById("sf-show").textContent) - 25).toString()
+                }
+            }   
         }
     else if (document.getElementById("rf-title").style.backgroundColor.toString() !== '')
         {
             wins = parseInt(document.getElementById("rf-show").textContent)
-            for(i=1;i<=wins/5;i++)
-            {
-                await new Promise(done => setTimeout(() => done(), 0.1));
-                document.getElementById("credit-score").textContent = (parseInt(document.getElementById("credit-score").textContent) + 5).toString()
-                document.getElementById("rf-show").textContent = (parseInt(document.getElementById("rf-show").textContent) - 5).toString()
-            }  
+            if (wins % 1000 === 0){
+                for(i=1;i<=wins/1000;i++)
+                {
+                    await new Promise(done => setTimeout(() => done(), 0.1));
+                    document.getElementById("credit-score").textContent = (parseInt(document.getElementById("credit-score").textContent) + 1000).toString()
+                    document.getElementById("rf-show").textContent = (parseInt(document.getElementById("rf-show").textContent) - 1000).toString()
+                }
+            }
+            else if (wins % 500 === 0){
+                for(i=1;i<=wins/500;i++)
+                {
+                    await new Promise(done => setTimeout(() => done(), 0.1));
+                    document.getElementById("credit-score").textContent = (parseInt(document.getElementById("credit-score").textContent) + 500).toString()
+                    document.getElementById("rf-show").textContent = (parseInt(document.getElementById("rf-show").textContent) - 500).toString()
+                }
+            }
+            else if (wins % 250 === 0){
+                for(i=1;i<=wins/250;i++)
+                {
+                    await new Promise(done => setTimeout(() => done(), 0.1));
+                    document.getElementById("credit-score").textContent = (parseInt(document.getElementById("credit-score").textContent) + 250).toString()
+                    document.getElementById("rf-show").textContent = (parseInt(document.getElementById("rf-show").textContent) - 250).toString()
+                }
+            }
+            else if (wins % 100 === 0){
+                for(i=1;i<=wins/100;i++)
+                {
+                    await new Promise(done => setTimeout(() => done(), 0.1));
+                    document.getElementById("credit-score").textContent = (parseInt(document.getElementById("credit-score").textContent) + 100).toString()
+                    document.getElementById("rf-show").textContent = (parseInt(document.getElementById("rf-show").textContent) - 100).toString()
+                }
+            }
+            else if (wins % 50 === 0){
+                for(i=1;i<=wins/50;i++)
+                {
+                    await new Promise(done => setTimeout(() => done(), 0.1));
+                    document.getElementById("credit-score").textContent = (parseInt(document.getElementById("credit-score").textContent) + 50).toString()
+                    document.getElementById("rf-show").textContent = (parseInt(document.getElementById("rf-show").textContent) - 50).toString()
+                }
+            }
+            else if (wins % 25 === 0){
+                for(i=1;i<=wins/25;i++)
+                {
+                    await new Promise(done => setTimeout(() => done(), 0.1));
+                    document.getElementById("credit-score").textContent = (parseInt(document.getElementById("credit-score").textContent) + 25).toString()
+                    document.getElementById("rf-show").textContent = (parseInt(document.getElementById("rf-show").textContent) - 25).toString()
+                }
+            }   
         }
     await new Promise(done => setTimeout(() => done(), 1000));
     backCards()
@@ -738,11 +1093,11 @@ doubleUpBtn.addEventListener("click",async function(){
 
 async function checkResults(){
 
-    // document.getElementById("card1").style.backgroundImage = 'url(./img/ten_of_clubs.png)'
-    // document.getElementById("card2").style.backgroundImage = 'url(./img/ace_of_clubs.png)'
-    // document.getElementById("card3").style.backgroundImage = 'url(./img/ace_of_diamonds.png)'
-    // document.getElementById("card4").style.backgroundImage = 'url(./img/ten_of_hearts.png)'
-    // document.getElementById("card5").style.backgroundImage = 'url(./img/ten_of_spades.png)'
+    document.getElementById("card1").style.backgroundImage = 'url(./img/king_of_hearts.png)'
+    document.getElementById("card2").style.backgroundImage = 'url(./img/king_of_spades.png)'
+    document.getElementById("card3").style.backgroundImage = 'url(./img/king_of_diamonds.png)'
+    document.getElementById("card4").style.backgroundImage = 'url(./img/king_of_clubs.png)'
+    document.getElementById("card5").style.backgroundImage = 'url(./img/9_of_hearts.png)'
 
     let resultArray=[]
     let numArray = []
@@ -814,11 +1169,11 @@ async function checkResults(){
     {
         document.getElementById("sf-title").style.backgroundColor = "#b08d23"
 
-        for(i=1;i<=150000;i++)
+        for(i=1;i<=150000/25;i++)
             {
             await new Promise(done => setTimeout(() => done(), 0.1));
-            document.getElementById("credit-score").textContent = (parseInt(document.getElementById("credit-score").textContent) + 1).toString()
-            document.getElementById("sf-bonus").textContent = (parseInt(document.getElementById("sf-bonus").textContent) - 1).toString()
+            document.getElementById("credit-score").textContent = (parseInt(document.getElementById("credit-score").textContent) + 25).toString()
+            document.getElementById("sf-bonus").textContent = (parseInt(document.getElementById("sf-bonus").textContent) - 25).toString()
             }
         
         await new Promise(done => setTimeout(() => done(), 1000));
@@ -841,20 +1196,26 @@ async function checkResults(){
         
         if (chooseIncentive === 1)
         {
-            for(i=1;i<=leftCarre;i++)
+            let leftRemainder = leftCarre % 25
+            for(i=1;i<=leftCarre/25;i++)
             {
             await new Promise(done => setTimeout(() => done(), 0.1));
-            document.getElementById("credit-score").textContent = (parseInt(document.getElementById("credit-score").textContent) + 1).toString()
-            document.getElementById("left-bc").textContent = (parseInt(document.getElementById("left-bc").textContent) - 1).toString()
+            document.getElementById("credit-score").textContent = (parseInt(document.getElementById("credit-score").textContent) + 25).toString()
+            document.getElementById("left-bc").textContent = (parseInt(document.getElementById("left-bc").textContent) - 25).toString()
             }
+            document.getElementById("credit-score").textContent = (parseInt(document.getElementById("credit-score").textContent) + leftRemainder).toString()
+            document.getElementById("left-bc").textContent = "0"
         }
         else {
-            for(i=1;i<=rightCarre;i++)
+            let rightRemainder = rightCarre % 25
+            for(i=1;i<=rightCarre/25;i++)
             {
             await new Promise(done => setTimeout(() => done(), 0.1));
-            document.getElementById("credit-score").textContent = (parseInt(document.getElementById("credit-score").textContent) + 1).toString()
-            document.getElementById("right-bc").textContent = (parseInt(document.getElementById("right-bc").textContent) - 1).toString()
+            document.getElementById("credit-score").textContent = (parseInt(document.getElementById("credit-score").textContent) + 25).toString()
+            document.getElementById("right-bc").textContent = (parseInt(document.getElementById("right-bc").textContent) - 25).toString()
             }
+            document.getElementById("credit-score").textContent = (parseInt(document.getElementById("credit-score").textContent) + rightRemainder).toString()
+            document.getElementById("right-bc").textContent = "0"
         }
         
         await new Promise(done => setTimeout(() => done(), 1000));
@@ -1037,15 +1398,15 @@ function clearNames(){
         document.getElementById("rf-title").style.backgroundColor = "rgb(6, 60, 129)"
         document.getElementById("rf-show").innerText = ((parseInt(document.getElementById("stake-score").innerText))*500).toString()
     }
-
+    document.getElementById("three-title").style.backgroundColor = "rgb(6, 60, 129)"
 }
 
 async function testCheckResults(){
 
-    // document.getElementById("card1").style.backgroundImage = 'url(./img/9_of_spades.png)'
-    // document.getElementById("card2").style.backgroundImage = 'url(./img/9_of_clubs.png)'
-    // document.getElementById("card3").style.backgroundImage = 'url(./img/king_of_diamonds.png)'
-    // document.getElementById("card4").style.backgroundImage = 'url(./img/king_of_hearts.png)'
+    // document.getElementById("card1").style.backgroundImage = 'url(./img/king_of_hearts.png)'
+    // document.getElementById("card2").style.backgroundImage = 'url(./img/queen_of_hearts.png)'
+    // document.getElementById("card3").style.backgroundImage = 'url(./img/jack_of_hearts.png)'
+    // document.getElementById("card4").style.backgroundImage = 'url(./img/ten_of_hearts.png)'
     // document.getElementById("card5").style.backgroundImage = 'url(./img/9_of_hearts.png)'
 
     let resultArray=[]
