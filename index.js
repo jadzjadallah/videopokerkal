@@ -1093,11 +1093,11 @@ doubleUpBtn.addEventListener("click",async function(){
 
 async function checkResults(){
 
-    // document.getElementById("card1").style.backgroundImage = 'url(./img/king_of_hearts.png)'
-    // document.getElementById("card2").style.backgroundImage = 'url(./img/king_of_spades.png)'
-    // document.getElementById("card3").style.backgroundImage = 'url(./img/king_of_diamonds.png)'
-    // document.getElementById("card4").style.backgroundImage = 'url(./img/king_of_clubs.png)'
-    // document.getElementById("card5").style.backgroundImage = 'url(./img/9_of_hearts.png)'
+    document.getElementById("card1").style.backgroundImage = 'url(./img/king_of_hearts.png)'
+    document.getElementById("card2").style.backgroundImage = 'url(./img/king_of_spades.png)'
+    document.getElementById("card3").style.backgroundImage = 'url(./img/king_of_clubs.png)'
+    document.getElementById("card4").style.backgroundImage = 'url(./img/9_of_clubs.png)'
+    document.getElementById("card5").style.backgroundImage = 'url(./img/9_of_hearts.png)'
 
     let resultArray=[]
     let numArray = []
@@ -1238,11 +1238,19 @@ async function checkResults(){
         document.getElementById("fh-title").style.backgroundColor = "#b08d23"
 
         let fhBonus = parseInt(document.getElementById("fh-bonus").innerText)
-        for(let i=1;i<=fhBonus;i++)
+        if (fhBonus >= 25)
         {
-            await new Promise(done => setTimeout(() => done(), 0.1));
-            document.getElementById("credit-score").textContent = (parseInt(document.getElementById("credit-score").textContent) + 1).toString()
-            document.getElementById("fh-bonus").textContent = (parseInt(document.getElementById("fh-bonus").textContent) - 1).toString()
+            fhRemainder = fhBonus % 25
+            for(let i=1;i<=fhBonus/25;i++)
+            {
+                await new Promise(done => setTimeout(() => done(), 0.1));
+                document.getElementById("credit-score").textContent = (parseInt(document.getElementById("credit-score").textContent) + 25).toString()
+                document.getElementById("fh-bonus").textContent = (parseInt(document.getElementById("fh-bonus").textContent) - 25).toString()
+            }
+        }
+        else{
+            document.getElementById("credit-score").textContent = (parseInt(document.getElementById("credit-score").textContent) + fhBonus).toString()
+            document.getElementById("fh-bonus").textContent = (parseInt(document.getElementById("fh-bonus").textContent) - fhBonus).toString()
         }
 
         await new Promise(done => setTimeout(() => done(), 1000));
@@ -1404,9 +1412,9 @@ function clearNames(){
 async function testCheckResults(){
 
     // document.getElementById("card1").style.backgroundImage = 'url(./img/king_of_hearts.png)'
-    // document.getElementById("card2").style.backgroundImage = 'url(./img/queen_of_hearts.png)'
-    // document.getElementById("card3").style.backgroundImage = 'url(./img/jack_of_hearts.png)'
-    // document.getElementById("card4").style.backgroundImage = 'url(./img/ten_of_hearts.png)'
+    // document.getElementById("card2").style.backgroundImage = 'url(./img/king_of_spades.png)'
+    // document.getElementById("card3").style.backgroundImage = 'url(./img/kinf_of_clubs.png)'
+    // document.getElementById("card4").style.backgroundImage = 'url(./img/9_of_clubs.png)'
     // document.getElementById("card5").style.backgroundImage = 'url(./img/9_of_hearts.png)'
 
     let resultArray=[]
